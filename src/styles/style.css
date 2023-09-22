@@ -33,6 +33,10 @@ input::placeholder, textarea::placeholder {
   border-bottom: 1px solid #aaa;
 }
 
+.input_search {
+  width: 400px;
+}
+
 .note-app__header h1 {
   margin: 8px 0;
   flex: 1;
