@@ -1,14 +1,14 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import NoteItem from "./NoteItem";
 
-class NotesList extends React.Component {
-  render() {
-    return (
-      <div className="notes-list">
-        <NoteItem />
-      </div>
-    )
-  }
+function NotesList({ notes, onDelete, onArchive }) {
+  return (
+    <div className="notes-list">
+      {notes.length === 0 ? (<p className="notes-list__empty-message">Tidak ada catatan</p>) : (notes.map(note => (
+        <NoteItem key={note.id} id={note.id} onDelete={onDelete} onArchive={onArchive} {...note} />
+      )))}
+    </div>
+  )
 }
 
 export default NotesList;

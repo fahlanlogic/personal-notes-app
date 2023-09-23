@@ -2,7 +2,12 @@ import { createRoot } from 'react-dom/client';
 
 // import style
 import './styles/style.css';
-import ContactApp from './ContactApp';
+import NoteAppBody from './components/NoteAppBody';
+import NoteAppHeader from './components/NoteAppHeader';
 
 const root = createRoot(document.getElementById('root'));
-root.render(<ContactApp />);
+root.render(
+<>
+<NoteAppHeader />
+<NoteAppBody />
+</>);
