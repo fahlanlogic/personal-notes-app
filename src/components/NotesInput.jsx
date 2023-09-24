@@ -36,7 +36,7 @@ class NotesInput extends React.Component {
     return (
       <div className="note-input">
         <h2>Buat Catatan</h2>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onFormSubmit}>
           <input type="text" placeholder="Ketik judul" value={this.state.title} onChange={this.onTitleChange} required/>
           <textarea cols="30" rows="10" placeholder="Ketik catatan" value={this.state.body} onChange={this.onBodyChange}></textarea>
           <button type="submit">Buat</button>

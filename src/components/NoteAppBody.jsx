@@ -1,7 +1,7 @@
 import { getInitialData } from "../utils/data";
 import NotesInput from "./NotesInput";
-import NotesList from "./NotesList";
 import React from "react";
+import NotesList from "./NotesList";
 
 class NoteAppBody extends React.Component {
   constructor(props) {
@@ -11,6 +11,8 @@ class NoteAppBody extends React.Component {
     }
 
     this.onAddEventHandler = this.onAddEventHandler.bind(this)
+    this.onDeleteEventHandler = this.onDeleteEventHandler.bind(this)
+    this.onArchivedEventHandler = this.onArchivedEventHandler.bind(this)
   }
 
   onAddEventHandler({ title, body }) {
@@ -29,14 +31,33 @@ class NoteAppBody extends React.Component {
       }
     })
   }
+
+  onDeleteEventHandler(id) {
+    const notes = this.state.notes.filter(note => note.id !== id)
+    this.setState({
+      notes
+    })
+  }
+
+  onArchivedEventHandler(id) {
+    const updateNotes = this.state.notes.filter(note => note.id !== id).map(note => {
+      note.archived = !note.archived
+    })
+    this.setState({
+      updateNotes
+    })
+  }
   render() {
+    let activeNotes = this.state.notes.filter(note => note.archived === false)
+    let archiveNotes = this.state.notes.filter(note => note.archived === true)
+
     return (
       <div className="note-app__body">
         <NotesInput addNote={this.onAddEventHandler}/>
         <h2>Catatan Aktif</h2>
-        <NotesList notes={this.state.notes}/>
+        <NotesList key={activeNotes.id} notes={activeNotes} onDelete={this.onDeleteEventHandler} onArchive={this.onArchivedEventHandler} />
         <h2>Arsip</h2>
-        {console.log(this.state.notes)}
+        <NotesList key={archiveNotes.id} notes={archiveNotes} onDelete={this.onDeleteEventHandler} onArchive={this.onArchivedEventHandler} />
       </div>
     )
   }
