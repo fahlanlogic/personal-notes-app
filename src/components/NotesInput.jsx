@@ -6,6 +6,7 @@ class NotesInput extends React.Component {
     super(props);
     this.state = {
       title: '',
+      titleChar: 50,
       body: '',
     }
 
@@ -15,9 +16,16 @@ class NotesInput extends React.Component {
   }
 
   onTitleChange(event) {
-    this.setState({
-      title: event.target.value
-    })
+    if (this.state.titleChar >= 0 && event.target.value.length <= 50) {
+      this.setState(() => {
+        return {
+          title: event.target.value,
+          titleChar: 50 - event.target.value.length
+        }
+      })
+    } else {
+      alert('Tidak boleh melebihi 50 karakter')
+    }
   }
 
   onBodyChange(event) {
@@ -37,6 +45,7 @@ class NotesInput extends React.Component {
       <div className="note-input">
         <h2>Buat Catatan</h2>
         <form onSubmit={this.onFormSubmit}>
+          <p className="note-input__title__char-limit">Sisa karakter: {this.state.titleChar}</p>
           <input type="text" placeholder="Ketik judul" value={this.state.title} onChange={this.onTitleChange} required/>
           <textarea cols="30" rows="10" placeholder="Ketik catatan" value={this.state.body} onChange={this.onBodyChange}></textarea>
           <button type="submit">Buat</button>
