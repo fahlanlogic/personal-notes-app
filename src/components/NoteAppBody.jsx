@@ -40,7 +40,7 @@ class NoteAppBody extends React.Component {
   }
 
   onArchivedEventHandler(id) {
-    const updateNotes = this.state.notes.filter(note => note.id !== id).map(note => {
+    const updateNotes = this.state.notes.filter(note => note.id === id).map(note => {
       note.archived = !note.archived
     })
     this.setState({
@@ -55,9 +55,9 @@ class NoteAppBody extends React.Component {
       <div className="note-app__body">
         <NotesInput addNote={this.onAddEventHandler}/>
         <h2>Catatan Aktif</h2>
-        <NotesList key={activeNotes.id} notes={activeNotes} onDelete={this.onDeleteEventHandler} onArchive={this.onArchivedEventHandler} />
+        <NotesList key={activeNotes.id} notes={activeNotes} onDelete={this.onDeleteEventHandler} onArchive={this.onArchivedEventHandler} isArchive="Arsip" />
         <h2>Arsip</h2>
-        <NotesList key={archiveNotes.id} notes={archiveNotes} onDelete={this.onDeleteEventHandler} onArchive={this.onArchivedEventHandler} />
+        <NotesList key={archiveNotes.id} notes={archiveNotes} onDelete={this.onDeleteEventHandler} onArchive={this.onArchivedEventHandler} isArchive="Aktif" />
       </div>
     )
   }
